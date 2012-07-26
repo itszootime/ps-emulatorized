@@ -1,0 +1,22 @@
+body {
+	background: #a5d4ef;
+}
+
+.template {
+	display: none;
+}
+
+.main-content {
+	padding: 20px;
+	background-color: white;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+	border-radius: 0 0 15px 15px;
+}
+
+.main-content input {
+	height: 28px;
+}
+
+.form-actions {
+	margin-bottom: 0;
+}
