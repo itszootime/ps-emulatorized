@@ -5,6 +5,7 @@
 .settings
 src/main/resources/config.json
 src/main/resources/et.yml
+src/main/resources/log4j.properties
 src/test/resources
 requests/
 target/
