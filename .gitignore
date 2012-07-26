@@ -1,0 +1,10 @@
+.DS_store
+.classpath
+.project
+.externalToolBuilders
+.settings
+src/main/resources/config.json
+src/main/resources/et.yml
+src/test/resources
+requests/
+target/
