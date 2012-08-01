@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
 <head>
   <title>${param.title} - emulatorized</title>
   <link href="css/bootstrap.css" rel="stylesheet">
@@ -18,10 +20,10 @@
   </div>
 </div>
 
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/lib/mustache.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="js/lib/mustache.js"></script>
 <c:forEach items="${param.scripts}" var="script">
-<script type="text/javascript" src="js/${script}.js"></script>
+<script src="js/${script}.js"></script>
 </c:forEach>
 
 </body>
