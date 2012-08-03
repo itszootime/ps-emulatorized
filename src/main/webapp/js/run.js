@@ -23,11 +23,14 @@ $(function() {
 				var inputs = process.inputs;
 				for (var j = 0; j < inputs.length; j++) {
 					var input = inputs[j];
-					$(Mustache.to_html($('.template.form-input').val(), {
+					var vars = {
 						label: input.identifier,
 						name: input.identifier,
+						detail: input.description,
+						uom: input.uom,
 						value: 0.5
-					})).prependTo($fieldset);
+					};
+					$(Mustache.to_html($('.template.form-input').val(), vars)).prependTo($fieldset);
 				}
 				
 				// show

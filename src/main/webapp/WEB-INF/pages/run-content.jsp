@@ -19,12 +19,17 @@
 	</div>
 </div>
 
+                
+              </div>
 <textarea class="template form-input">
 <div class="control-group">
   <label class="control-label">{{label}}</label>
   <div class="controls">
-    <input type="text" name="{{name}}" value="{{value}}"/>
-    {{#help}}<p class="help-block">{{help}}</p>{{/help}}
+  	{{#uom}}<div class="input-append">{{/uom}}
+      <input type="text" class="span2" name="{{name}}" value="{{value}}"/>
+      {{#uom}}<span class="add-on">{{uom}}</span>{{/uom}}
+    {{#uom}}</div>{{/uom}}
+    {{#detail}}<p class="help-block">{{detail}}</p>{{/detail}}
   </div>
 </div>
 </textarea>

@@ -11,6 +11,7 @@ import org.uncertweb.et.emulator.Emulator;
 import org.uncertweb.et.emulator.EmulatorEvaluationResult;
 import org.uncertweb.et.emulator.EmulatorEvaluator;
 import org.uncertweb.et.emulator.EmulatorEvaluatorException;
+import org.uncertweb.et.parameter.ParameterDescription;
 import org.uncertweb.ps.data.DataDescription;
 import org.uncertweb.ps.data.Input;
 import org.uncertweb.ps.data.Metadata;
@@ -76,8 +77,17 @@ public class RunEmulator extends AbstractProcess {
 
 	@Override
 	public List<Metadata> getInputMetadata(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Metadata> metadata = new ArrayList<Metadata>();
+		for (org.uncertweb.et.parameter.Input input : emulator.getInputs()) {
+			if (input.getIdentifier().equals(arg0)) {
+				ParameterDescription description = input.getDescription();
+				if (description != null) {
+					metadata.add(new Metadata("uom", description.getUom()));
+					metadata.add(new Metadata("description", description.getDetail()));
+				}
+			}
+		}
+		return metadata;
 	}
 
 	@Override
@@ -92,8 +102,17 @@ public class RunEmulator extends AbstractProcess {
 
 	@Override
 	public List<Metadata> getOutputMetadata(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Metadata> metadata = new ArrayList<Metadata>();
+		for (org.uncertweb.et.parameter.Output output : emulator.getOutputs()) {
+			if (output.getIdentifier().equals(arg0)) {
+				ParameterDescription description = output.getDescription();
+				if (description != null) {
+					metadata.add(new Metadata("uom", description.getUom()));
+					metadata.add(new Metadata("description", description.getDetail()));
+				}
+			}
+		}
+		return metadata;
 	}
 
 	@Override
@@ -133,7 +152,6 @@ public class RunEmulator extends AbstractProcess {
 
 	@Override
 	public List<Metadata> getMetadata() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
