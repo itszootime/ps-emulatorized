@@ -10,19 +10,9 @@ $(function() {
         return rndedNum;
     }
 	
-	$.get(ENDPOINT + '?jsondesc', function(data) {
-		processes = data.processes;
-		for (var i = 0; i < processes.length; i++) {
-			var identifier = processes[i].identifier;
-			if (identifier.match(/^Upload/) == null) {
-				$('#select select').append('<option value="' + identifier + '">' + identifier + '</option>');
-			}
-		}
-	});
-	
-	$('#select button').on('click', function() {
+	function generateForm() {
 		// hide
-		$('#params').slideUp();
+		$('#params').slideUp('fast');
 		
 		// add controls
 		for (var i = 0; i < processes.length; i++) {
@@ -45,11 +35,27 @@ $(function() {
 					};
 					$actions.before($(Mustache.to_html($('.template.form-input').val(), vars)));
 				}
+				break;
 			}
 		}
 		
 		// show
 		$('#params').slideDown();
+	}
+	
+	$.get(ENDPOINT + '?jsondesc', function(data) {
+		processes = data.processes;
+		for (var i = 0; i < processes.length; i++) {
+			var identifier = processes[i].identifier;
+			if (identifier.match(/^Upload/) == null) {
+				$('#select select').append('<option value="' + identifier + '">' + identifier + '</option>');
+			}
+		}
+		generateForm();
+	});
+	
+	$('#select select').on('change', function() {
+		generateForm();
 	});
 	
 	$('#params form').on('submit', function(event) {

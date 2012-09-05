@@ -1,15 +1,17 @@
 <div class="row">
 	<div class="span7">
 		<div id="select">
-			<form class="well form-inline">
-				<select></select>
-				<button type="button" class="btn">Load</button>
-			</form>					
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="control-group">
+					  <label class="control-label">Emulator</label>
+					  <div class="controls">
+					  	<select></select>
+					  </div>
+					</div>
+				</fieldset>
+			</form>
 		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="span7">
 		<div id="params" class="hide">
 			<form class="form-horizontal">
 			  <fieldset>

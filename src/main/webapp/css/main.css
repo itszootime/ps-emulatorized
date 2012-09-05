@@ -17,3 +17,11 @@ body {
 .form-actions {
 	margin-bottom: 0;
 }
+
+#select {
+	margin-bottom: 20px;
+}
+
+form {
+	margin-bottom: 0;
+}
