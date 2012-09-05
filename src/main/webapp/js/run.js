@@ -4,6 +4,12 @@ var JSON_ENDPOINT = ENDPOINT + '/json';
 var processes;
 
 $(function() {
+	function roundNumber(number, digits) {
+        var multiple = Math.pow(10, digits);
+        var rndedNum = Math.round(number * multiple) / multiple;
+        return rndedNum;
+    }
+	
 	$.get(ENDPOINT + '?jsondesc', function(data) {
 		processes = data.processes;
 		for (var i = 0; i < processes.length; i++) {
@@ -15,28 +21,35 @@ $(function() {
 	});
 	
 	$('#select button').on('click', function() {
+		// hide
+		$('#params').slideUp();
+		
+		// add controls
 		for (var i = 0; i < processes.length; i++) {
 			var process = processes[i];
-			var $fieldset = $('#params fieldset');
+			$('#params .control-group').remove();
+			var $actions = $('#params .form-actions');
 			if (process.identifier == $('#select select option:selected').val()) {
 				// add inputs
 				var inputs = process.inputs;
 				for (var j = 0; j < inputs.length; j++) {
 					var input = inputs[j];
+					var min = parseFloat(input['minimum-value']);
+					var max = parseFloat(input['maximum-value']);
 					var vars = {
 						label: input.identifier,
 						name: input.identifier,
-						detail: input.description,
+						detail: 'Min = ' + min + ', max = ' + max + '. ' + input.description,
 						uom: input.uom,
-						value: 0.5
+						value: min + ((max - min) / 2)
 					};
-					$(Mustache.to_html($('.template.form-input').val(), vars)).prependTo($fieldset);
+					$actions.before($(Mustache.to_html($('.template.form-input').val(), vars)));
 				}
-				
-				// show
-				$('#params').slideDown();
 			}
 		}
+		
+		// show
+		$('#params').slideDown();
 	});
 	
 	$('#params form').on('submit', function(event) {
@@ -55,7 +68,17 @@ $(function() {
 	        processData: false,
 	        data: JSON.stringify(base),
 	        success: function(data) {
-	        	alert(JSON.stringify(data));
+	        	var result = data[identifier + 'Response'];
+	        	var mean;
+	        	var covariance;
+	        	for (var key in result) {
+	        		if (key.match(/Mean$/)) {
+	        			mean = result[key][0];
+	        		} else if (key.match(/Covariance$/)) {
+	        			covariance = result[key][0];
+	        		}
+	        	}
+	        	alert('Mean is ' + roundNumber(mean, 3) + ', covariance is ' + roundNumber(covariance, 3) + '.');
 	        }
 		});
 	});

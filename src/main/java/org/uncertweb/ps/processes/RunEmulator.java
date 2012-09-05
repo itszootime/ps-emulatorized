@@ -12,6 +12,7 @@ import org.uncertweb.et.emulator.EmulatorEvaluationResult;
 import org.uncertweb.et.emulator.EmulatorEvaluator;
 import org.uncertweb.et.emulator.EmulatorEvaluatorException;
 import org.uncertweb.et.parameter.ParameterDescription;
+import org.uncertweb.et.parameter.VariableInput;
 import org.uncertweb.ps.data.DataDescription;
 import org.uncertweb.ps.data.Input;
 import org.uncertweb.ps.data.Metadata;
@@ -80,6 +81,12 @@ public class RunEmulator extends AbstractProcess {
 		List<Metadata> metadata = new ArrayList<Metadata>();
 		for (org.uncertweb.et.parameter.Input input : emulator.getInputs()) {
 			if (input.getIdentifier().equals(arg0)) {
+				// min max
+				VariableInput asVariable = input.getAsVariableInput();
+				metadata.add(new Metadata("minimum-value", String.valueOf(asVariable.getMin())));
+				metadata.add(new Metadata("maximum-value", String.valueOf(asVariable.getMax())));
+				
+				// any additional?
 				ParameterDescription description = input.getDescription();
 				if (description != null) {
 					metadata.add(new Metadata("uom", description.getUom()));

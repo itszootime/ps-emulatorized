@@ -6,7 +6,10 @@
 				<button type="button" class="btn">Load</button>
 			</form>					
 		</div>
-		
+	</div>
+</div>
+<div class="row">
+	<div class="span7">
 		<div id="params" class="hide">
 			<form class="form-horizontal">
 			  <fieldset>
