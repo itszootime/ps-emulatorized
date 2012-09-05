@@ -1,2 +1,2 @@
-<a href="upload.jsp">upload</a> or
-<a href="run.jsp">run</a>
+<a href="upload.jsp">Upload</a> or
+<a href="run.jsp">run</a> an emulator.

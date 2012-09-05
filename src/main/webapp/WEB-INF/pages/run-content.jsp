@@ -19,8 +19,6 @@
 	</div>
 </div>
 
-                
-              </div>
 <textarea class="template form-input">
 <div class="control-group">
   <label class="control-label">{{label}}</label>
