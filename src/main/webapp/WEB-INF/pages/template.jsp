@@ -14,7 +14,7 @@
 <div class="container">
   <div class="main-content">
     <div class="page-header">
-      <h1>${param.header}</h1>
+      <h1><a href=".">emulatorized</a> &gt; ${param.header}</h1>
     </div>
     <jsp:include page="/WEB-INF/pages/${param.content}.jsp"/>
   </div>

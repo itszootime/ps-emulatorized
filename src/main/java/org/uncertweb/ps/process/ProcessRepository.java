@@ -22,6 +22,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
+import com.mongodb.MongoException;
 
 /**
  * Special edition process repository, with emulator support!
@@ -63,9 +64,7 @@ public class ProcessRepository {
 		// FIXME: integrate this transactional process business with main framework
 		// load equations
 		try {
-			Mongo m = new Mongo();
-			DB db = m.getDB("ps");
-			DBCollection coll = db.getCollection("equations");
+			DBCollection coll = getEquationsCollection();
 			DBCursor cur = coll.find();
 			while (cur.hasNext()) {
 				DBObject obj = cur.next();
@@ -81,9 +80,7 @@ public class ProcessRepository {
 		
 		// load emulators
 		try {
-			Mongo m = new Mongo();
-			DB db = m.getDB("ps");
-			DBCollection coll = db.getCollection("emulators");
+			DBCollection coll = getEmulatorsCollection();
 			DBCursor cur = coll.find();
 			while (cur.hasNext()) {
 				DBObject obj = cur.next();
@@ -145,9 +142,7 @@ public class ProcessRepository {
 		}
 		else {
 			// add to db
-			Mongo m = new Mongo();
-			DB db = m.getDB("ps");
-			DBCollection coll = db.getCollection("equations");
+			DBCollection coll = getEquationsCollection();
 			BasicDBObject doc = new BasicDBObject();
 			doc.put("identifier", identifier);
 			doc.put("expression", expression);
@@ -167,9 +162,7 @@ public class ProcessRepository {
 		}
 		else {
 			// add to db
-			Mongo m = new Mongo();
-			DB db = m.getDB("ps");
-			DBCollection coll = db.getCollection("emulators");
+			DBCollection coll = getEmulatorsCollection();
 			BasicDBObject doc = new BasicDBObject();
 			doc.put("identifier", identifier);
 			JSON json = new JSON();
@@ -192,6 +185,20 @@ public class ProcessRepository {
 		List<AbstractProcess> processList = new ArrayList<AbstractProcess>();
 		processList.addAll(processes.values());
 		return processList;
+	}
+	
+	private DBCollection getEquationsCollection() throws UnknownHostException, MongoException {
+		return getCollection("equations");
+	}
+	
+	private DBCollection getEmulatorsCollection() throws UnknownHostException, MongoException {
+		return getCollection("emulators");
+	}
+	
+	private DBCollection getCollection(String name) throws UnknownHostException, MongoException {
+		Mongo m = new Mongo();
+		DB db = m.getDB("ps-emulatorized");
+		return db.getCollection(name);
 	}
 	
 }
