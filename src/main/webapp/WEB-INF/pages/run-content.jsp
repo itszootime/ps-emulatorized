@@ -1,5 +1,6 @@
 <div class="row">
 	<div class="span7">
+		<div class="alert hide"></div>
 		<div id="select">
 			<form class="form-horizontal">
 				<fieldset>
@@ -17,6 +18,7 @@
 			  <fieldset>
 				<div class="form-actions">
         			<button type="submit" class="btn btn-primary">Run!</button>
+        			<span class="busy"></span>
         		</div>
   			  </fieldset>
 			</form>

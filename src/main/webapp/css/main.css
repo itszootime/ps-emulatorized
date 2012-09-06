@@ -15,6 +15,7 @@ body {
 }
 
 .form-actions {
+	margin-top: 0;
 	margin-bottom: 0;
 }
 
@@ -24,4 +25,10 @@ body {
 
 form {
 	margin-bottom: 0;
+}
+
+.busy {
+	display: inline-block;
+	margin-left: 15px;
+	padding-bottom: 4px;
 }

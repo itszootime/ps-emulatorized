@@ -23,6 +23,9 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 <script src="js/lib/mustache.js"></script>
+<script src="js/lib/spin.min.js"></script>
+<script src="js/lib/jquery.spin.js"></script>
+<script src="js/application.js"></script>
 <c:forEach items="${param.scripts}" var="script">
 <script src="js/${script}.js"></script>
 </c:forEach>

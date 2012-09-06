@@ -36,7 +36,7 @@
     <dependency>
       <groupId>org.uncertweb</groupId>
       <artifactId>ps-framework</artifactId>
-      <version>0.2.3-SNAPSHOT</version>
+      <version>0.2.4-SNAPSHOT</version>
     </dependency>
 
     <!-- Process specific dependencies: UncertWeb developed -->

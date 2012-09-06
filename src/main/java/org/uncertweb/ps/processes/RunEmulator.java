@@ -47,8 +47,6 @@ public class RunEmulator extends AbstractProcess {
 		this.identifier = identifier;
 		this.emulator = emulator;
 
-		// parse emulator?
-
 		// inputs
 		for (String inputIdentifier : emulator.getDesign().getInputIdentifiers()) {
 			inputMap.put(inputIdentifier, new DataDescription(Double[].class));

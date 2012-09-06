@@ -41,11 +41,3 @@ $(function() {
     });
   });
 });
-
-function showAlert(type, message) {
-	$('.alert').addClass('alert-' + type).html(message).slideDown('fast');
-}
-
-function hideAlert() {
-	$('.alert').removeClass('alert-error alert-success').slideUp('fast');
-}

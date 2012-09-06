@@ -3,6 +3,7 @@ package org.uncertweb.ps.processes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.uncertweb.et.emulator.Emulator;
@@ -72,6 +73,11 @@ public class UploadEmulator extends AbstractProcess {
 		Emulator emulator = arg0.get("Emulator").getAsSingleInput().getObjectAs(Emulator.class);
 		
 		// TODO: make sure the identifier is valid for deployment
+		Pattern pattern = Pattern.compile("[a-zA-Z][a-zA-Z0-9]*");
+		if (!pattern.matcher(identifier).matches()) {
+			throw new ProcessException("Invalid identifier: it should start with a letter and only contain alphanumeric characters.");
+		}
+		
 		// no emulators that have more than one output
 		
 		// add		
