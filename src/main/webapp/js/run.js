@@ -29,9 +29,14 @@ $(function() {
 						var input = inputs[j];
 						var min = parseFloat(input['minimum-value']);
 						var max = parseFloat(input['maximum-value']);
+						var value;
 						var detail = '';
 						if (!isNaN(min) && !isNaN(max)) {
 							detail += 'Min = ' + min + ', max = ' + max + '. ';
+							value = min + ((max - min) / 2);
+						}
+						if (input.identifier.match(/Samples$/)) {
+							value = 10;
 						}
 						detail += input.description;
 						var vars = {
@@ -39,7 +44,7 @@ $(function() {
 							name: input.identifier,
 							detail: detail,
 							uom: input.uom,
-							value: min + ((max - min) / 2)
+							value: value
 						};
 						$actions.before($(Mustache.to_html($('.template.form-input').val(), vars)));
 					}
@@ -114,16 +119,31 @@ $(function() {
 	        		showAlert('error', data.ProcessException.message);
 	        	} else {
 		        	var result = data[identifier + 'Response'];
+		        	
+		        	// results
 		        	var mean;
-		        	var covariance;
+		        	var variance;
+		        	var samples;
 		        	for (var key in result) {
 		        		if (key.match(/Mean$/)) {
 		        			mean = result[key][0];
-		        		} else if (key.match(/Covariance$/)) {
-		        			covariance = result[key][0];
+		        		} else if (key.match(/Variance$/)) {
+		        			variance = result[key][0];
+		        		} else if (key.match(/Samples$/)) {
+		        			samples = result[key][0];
 		        		}
 		        	}
-		        	showAlert('success', 'Mean is ' + roundNumber(mean, 3) + ', covariance is ' + roundNumber(covariance, 3) + '.');
+		        	
+		        	// check process type
+		        	if (identifier.match(/Samples$/)) {
+		        		roundSamples = [];
+		        		for (var i = 0; i < samples.length; i++) {
+		        			roundSamples.push(roundNumber(samples[i], 3));
+		        		}
+		        		showAlert('success', 'Samples are ' + roundSamples.join(', ') + '.');
+		        	} else {
+		        		showAlert('success', 'Mean is ' + roundNumber(mean, 3) + ', variance is ' + roundNumber(variance, 3) + '.');
+		        	}
 	        	}
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {

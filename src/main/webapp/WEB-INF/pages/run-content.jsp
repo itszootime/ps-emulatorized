@@ -20,8 +20,15 @@
 			<form class="form-horizontal">
 			  <fieldset>
 			   <legend>Inputs</legend>
+         <div id="samples-group" class="control-group">
+           <label class="control-label">Number of samples</label>
+           <div class="controls">
+             <input type="text" class="span2" name="NumSamples" />
+             <p class="help-block">Leave blank to get the output distribution instead</p>
+           </div>
+         </div>
 				 <div class="form-actions">
-        		<button type="submit" class="btn btn-primary">Run!</button>
+        		<button type="submit" class="btn btn-primary">Run</button>
         		<span class="busy hide"></span>
         	</div>
   			</fieldset>
@@ -31,7 +38,7 @@
 </div>
 
 <textarea class="template form-input">
-<div class="control-group">
+<div class="control-group emulator-input">
   <label class="control-label">{{label}}</label>
   <div class="controls">
   	{{#uom}}<div class="input-append">{{/uom}}

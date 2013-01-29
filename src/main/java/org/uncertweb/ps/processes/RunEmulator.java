@@ -32,11 +32,11 @@ public class RunEmulator extends AbstractProcess {
 
 	private final Logger logger = Logger.getLogger(RunEmulator.class);
 
-	private Map<String, DataDescription> inputMap;
-	private Map<String, DataDescription> outputMap;
+	protected Map<String, DataDescription> inputMap;
+	protected Map<String, DataDescription> outputMap;
 
-	private String identifier;
-	private Emulator emulator;
+	protected String identifier;
+	protected Emulator emulator;
 
 	public RunEmulator(String identifier, Emulator emulator) {
 		// setup maps, treemap for ordering

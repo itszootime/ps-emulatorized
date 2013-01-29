@@ -14,6 +14,7 @@ import org.uncertweb.et.emulator.Emulator;
 import org.uncertweb.et.json.JSON;
 import org.uncertweb.ps.Config;
 import org.uncertweb.ps.processes.RunEmulator;
+import org.uncertweb.ps.processes.RunEmulatorSamples;
 import org.uncertweb.ps.processes.RunEquation;
 
 import com.mongodb.BasicDBObject;
@@ -87,8 +88,8 @@ public class ProcessRepository {
 				JSON json = new JSON();
 				String identifier = (String)obj.get("identifier");
 				Emulator emulator = json.parse(new StringReader((String) obj.get("emulator")), Emulator.class);
-				RunEmulator process = new RunEmulator(identifier, emulator);
-				addProcess(process);
+				addProcess(new RunEmulator(identifier, emulator));
+				addProcess(new RunEmulatorSamples(identifier, emulator));
 				logger.info("Loaded stored emulator '" + identifier + "'.");
 			}
 		}
@@ -172,8 +173,8 @@ public class ProcessRepository {
 			coll.insert(doc);				
 			
 			// add to instance
-			RunEmulator process = new RunEmulator(identifier, emulator);
-			addProcess(process);
+			addProcess(new RunEmulator(identifier, emulator));
+			addProcess(new RunEmulatorSamples(identifier, emulator));
 		}				
 	}
 	
