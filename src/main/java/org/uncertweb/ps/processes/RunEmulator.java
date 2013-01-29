@@ -55,7 +55,7 @@ public class RunEmulator extends AbstractProcess {
 		// outputs
 		for (String outputIdentifier : emulator.getEvaluationResult().getOutputIdentifiers()) {
 			outputMap.put(outputIdentifier + "Mean", new DataDescription(Double[].class));
-			outputMap.put(outputIdentifier + "Covariance", new DataDescription(Double[].class));
+			outputMap.put(outputIdentifier + "Variance", new DataDescription(Double[].class));
 		}
 	}
 
@@ -146,9 +146,9 @@ public class RunEmulator extends AbstractProcess {
 			// only supports 1d output at the moment
 			String outputIdentifier = emulator.getOutputs().get(0).getIdentifier();
 			Double[] predictedMean = result.getMeanResults(outputIdentifier);
-			Double[] predictedCov = result.getCovarianceResults(outputIdentifier);
+			Double[] predictedVar = result.getCovarianceResults(outputIdentifier);
 			outputs.add(new SingleOutput(outputIdentifier + "Mean", predictedMean));
-			outputs.add(new SingleOutput(outputIdentifier + "Covariance", predictedCov));
+			outputs.add(new SingleOutput(outputIdentifier + "Variance", predictedVar));
 			
 			return outputs;
 		}
