@@ -84,7 +84,7 @@ public class RunEmulatorSamples extends RunEmulator {
 			// get samples
 			List<Double[]> samples = new ArrayList<Double[]>();
 			for (int i = 0; i < predictedMean.length; i++) {
-				NormalDistributionImpl dist = new NormalDistributionImpl(predictedMean[i], predictedVar[i]);
+				NormalDistributionImpl dist = new NormalDistributionImpl(predictedMean[i], Math.sqrt(predictedVar[i]));
 				double[] distSamples = dist.sample(numSamples);
 				samples.add(ArrayUtils.toObject(distSamples));				
 			}
