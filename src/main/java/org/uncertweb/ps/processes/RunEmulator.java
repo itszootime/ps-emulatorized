@@ -80,9 +80,11 @@ public class RunEmulator extends AbstractProcess {
 		for (org.uncertweb.et.parameter.Input input : emulator.getInputs()) {
 			if (input.getIdentifier().equals(arg0)) {
 				// min max
-				VariableInput asVariable = input.getAsVariableInput();
-				metadata.add(new Metadata("minimum-value", String.valueOf(asVariable.getMin())));
-				metadata.add(new Metadata("maximum-value", String.valueOf(asVariable.getMax())));
+				if (input.isVariableInput()) {
+					VariableInput asVariable = input.getAsVariableInput();
+					metadata.add(new Metadata("minimum-value", String.valueOf(asVariable.getMin())));
+					metadata.add(new Metadata("maximum-value", String.valueOf(asVariable.getMax())));
+				}
 				
 				// any additional?
 				ParameterDescription description = input.getDescription();

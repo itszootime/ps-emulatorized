@@ -21,8 +21,13 @@ $(function() {
           Emulator: emulator }
     };
     
+    // we are busy
+    $('.busy').fadeIn('fast');
+    $btn.prop('disabled', true);
+    
+    // send upload request
     $.post('service/json', JSON.stringify(request))
-    .success(function(data) {
+	.success(function(data) {
       var message;
       var type;
       if ('UploadEmulatorResponse' in data) {
@@ -34,10 +39,15 @@ $(function() {
     	  message = data.ProcessException.message;
     	  type = 'error';
       }
-      showAlert(type, message)
+      showAlert(type, message);
     })
     .error(function(jqXHR, textStatus, errorThrown) {
     	showAlert('error', textStatus);
-    });
+    })
+    .complete(function() {
+    	// we are not busy
+		$('.busy').fadeOut('fast');
+		$btn.prop('disabled', false);
+	});
   });
 });

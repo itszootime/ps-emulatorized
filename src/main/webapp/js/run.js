@@ -11,48 +11,59 @@ $(function() {
     }
 	
 	function generateForm() {
-		// hide
+		// clear previous
 		hideAlert();
+		
+		// create new params
 		$('#params').slideUp('fast', function() {
 			// add controls
 			for (var i = 0; i < processes.length; i++) {
 				var process = processes[i];
 				$('#params .control-group').remove();
 				var $actions = $('#params .form-actions');
-				if (process.identifier == $('#select select option:selected').val()) {
+				var selectedIdentifier = $('#select select option:selected').val();
+				if (process.identifier == selectedIdentifier) {
 					// add inputs
 					var inputs = process.inputs;
 					for (var j = 0; j < inputs.length; j++) {
 						var input = inputs[j];
 						var min = parseFloat(input['minimum-value']);
 						var max = parseFloat(input['maximum-value']);
+						var detail = '';
+						if (!isNaN(min) && !isNaN(max)) {
+							detail += 'Min = ' + min + ', max = ' + max + '. ';
+						}
+						detail += input.description;
 						var vars = {
 							label: input.identifier,
 							name: input.identifier,
-							detail: 'Min = ' + min + ', max = ' + max + '. ' + input.description,
+							detail: detail,
 							uom: input.uom,
 							value: min + ((max - min) / 2)
 						};
 						$actions.before($(Mustache.to_html($('.template.form-input').val(), vars)));
 					}
+					
+					// show form
+					$('#params').slideDown();
+					
 					break;
 				}
 			}
 		});
-		
-		// show
-		$('#params .busy').hide();
-		$('#params').slideDown();
 	}
 	
 	$.get(ENDPOINT + '?jsondesc', function(data) {
 		processes = data.processes;
+		$select = $('#select select');
 		for (var i = 0; i < processes.length; i++) {
 			var identifier = processes[i].identifier;
 			if (identifier.match(/^Upload/) == null) {
-				$('#select select').append('<option value="' + identifier + '">' + identifier + '</option>');
+				$select.append('<option value="' + identifier + '">' + identifier + '</option>');
 			}
 		}
+		$('#select .busy').fadeOut('fast');
+		$select.prop('disabled', false);
 		generateForm();
 	});
 	

@@ -7,7 +7,10 @@
 					<div class="control-group">
 					  <label class="control-label">Emulator</label>
 					  <div class="controls">
-					  	<select></select>
+					  	<select disabled>
+					  	  <option>Select from list</option>
+					  	</select>
+					  	<span class="busy"></span>
 					  </div>
 					</div>
 				</fieldset>
@@ -16,11 +19,12 @@
 		<div id="params" class="hide">
 			<form class="form-horizontal">
 			  <fieldset>
-				<div class="form-actions">
-        			<button type="submit" class="btn btn-primary">Run!</button>
-        			<span class="busy"></span>
-        		</div>
-  			  </fieldset>
+			   <legend>Inputs</legend>
+				 <div class="form-actions">
+        		<button type="submit" class="btn btn-primary">Run!</button>
+        		<span class="busy hide"></span>
+        	</div>
+  			</fieldset>
 			</form>
 		</div>
 	</div>

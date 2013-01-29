@@ -19,6 +19,7 @@
 				</div>
   			    <div class="form-actions">        		
 			    	<button type="submit" class="btn btn-primary">Upload!</button>
+			    	<span class="busy hide"></span>
 			  	</div>
 			</fieldset>
 		</form>

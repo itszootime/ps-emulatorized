@@ -16,14 +16,25 @@ $.fn.spin.defaults = {
 };
 
 function showAlert(type, message) {
-	$('.alert').addClass('alert-' + type).html(message).slideDown('fast');
+	// animation that does nothing so addClass doesn't get called before
+	// removeClass of hideAlert
+	$('.alert').fadeOut(0, function() {
+		$(this).addClass('alert-' + type).html(message).slideDown('fast');
+	});
 }
 
 function hideAlert() {
 	var alert = $('.alert');
-	alert.slideUp('fast').removeClass('alert-error alert-success');
+	alert.slideUp('fast', function() {
+		$(this).removeClass('alert-error alert-success');
+	});
 }
 
 $(function() {
-	$('.busy').spin();
+	$('.busy').each(function() {
+		var $busy = $(this);
+		var hidden = $busy.hasClass('hide');
+		if (hidden) { $busy.removeClass('hide').hide(); }
+		$busy.spin();
+	});
 });
